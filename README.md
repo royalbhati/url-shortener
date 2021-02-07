@@ -1,6 +1,10 @@
 
 URL Shortener
 
+Basic Flow
+
+- Generate a Unique ID 
+- Generate a base62 short url using the unique ID
 
 
 Distributed Unique ID generator
@@ -26,5 +30,11 @@ Since the project is more of me learning rather than making it a production read
 
 
 
+
+TODO :
+  - Error Responses 
+  - Authentication
+  - Redirection
+  - Testing
 
   
