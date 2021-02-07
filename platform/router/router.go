@@ -32,5 +32,6 @@ func (router *Router) Handle(method string, path string, customHandler Handler) 
 			router.log.Printf("Unhandled error: %+v", err)
 		}
 	}
+
 	router.mux.MethodFunc(method, path, handler)
 }

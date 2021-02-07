@@ -6,8 +6,11 @@ import (
 	"os"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/royalbhati/urlshortener/app/config"
 	"github.com/royalbhati/urlshortener/app/routes"
+	"github.com/royalbhati/urlshortener/platform/database"
+	"github.com/royalbhati/urlshortener/platform/redis"
 )
 
 func main() {
@@ -36,9 +39,22 @@ func main() {
 
 func run(cfg *config.Config, log *log.Logger) error {
 
+	db, err := database.Open(cfg)
+	if err != nil {
+		return errors.Wrap(err, "connecting to db")
+	}
+	defer db.Close()
+
+	rdb, err := redis.Open(cfg)
+	if err != nil {
+		return errors.Wrap(err, "connecting to redis db")
+
+	}
+	defer rdb.Close()
+
 	api := http.Server{
 		Addr:         cfg.Web.Host + ":" + cfg.Web.Port,
-		Handler:      routes.API(log),
+		Handler:      routes.API(log, db, rdb),
 		ReadTimeout:  cfg.Web.Timeout.Read * time.Second,
 		WriteTimeout: cfg.Web.Timeout.Write * time.Second,
 	}

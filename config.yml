@@ -6,3 +6,13 @@ web:
     read: 10
     write: 10
     server: 5
+database:
+  user: postgres
+  password: postgres
+  host: localhost
+  name: postgres
+  disabletls: true
+redis:
+  address: localhost
+  port: 6379
+  db: 0
