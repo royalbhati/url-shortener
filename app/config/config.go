@@ -9,32 +9,40 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Config struct for webapp config
 type Config struct {
 	Web struct {
-		// Host is the local machine IP Address to bind the HTTP Server to
 		Host    string `yaml:"host"`
 		Port    string `yaml:"port"`
 		Timeout struct {
-			// Server is the general server timeout to use
-			// for graceful shutdowns
 			Server time.Duration `yaml:"server"`
-
-			// Write is the amount of time to wait until an HTTP server
-			// write opperation is cancelled
-			Write time.Duration `yaml:"write"`
-
-			// Read is the amount of time to wait until an HTTP server
-			// read operation is cancelled
-			Read time.Duration `yaml:"read"`
+			Write  time.Duration `yaml:"write"`
+			Read   time.Duration `yaml:"read"`
 		} `yaml:"timeout"`
 	} `yaml:"web"`
+
+	Database struct {
+		User       string `yaml:"user"`
+		Password   string `yaml:"password"`
+		Host       string `yaml:"host"`
+		Name       string `yaml:"name"`
+		DisableTLS bool   `yaml:"disabletls"`
+	} `yaml:"database"`
+
+	Redis struct {
+		Address string `yaml:"address"`
+		Port    string `yaml:"port"`
+		DB      int    `yaml:"db"`
+	} `yaml:"redis"`
 }
+
+// Config struct for webapp config
 
 //flags struct for CLI configs change
 //Might use it for future work
 type Flags struct {
-	Path string
+	Path    string
+	Seed    string
+	Migrate string
 }
 
 // NewConfig returns a new decoded Config struct
