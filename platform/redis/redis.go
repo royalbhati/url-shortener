@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/royalbhati/urlshortener/app/config"
+	"github.com/royalbhati/urlshortener/cmd/config"
 )
 
 func Open(cfg *config.Config) (*redis.Client, error) {

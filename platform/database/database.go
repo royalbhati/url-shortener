@@ -5,7 +5,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" // The database driver in use.
-	"github.com/royalbhati/urlshortener/app/config"
+	"github.com/royalbhati/urlshortener/cmd/config"
 )
 
 // Open knows how to open a database connection based on the configuration.

@@ -29,6 +29,7 @@ func (router *Router) Handle(method string, path string, customHandler Handler) 
 
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		if err := customHandler(w, r); err != nil {
+			Response(w, err.Error(), http.StatusInternalServerError)
 			router.log.Printf("Unhandled error: %+v", err)
 		}
 	}
